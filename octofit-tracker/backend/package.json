@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "seed": "npm run build && node dist/scripts/seed.js",
     "start": "node dist/server.js"
   },
   "dependencies": {
