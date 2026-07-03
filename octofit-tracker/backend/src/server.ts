@@ -8,9 +8,10 @@ import workoutsRouter from './routes/workouts.js';
 
 const app = express();
 const port = Number(process.env.PORT || 8000);
+const host = process.env.HOST || '0.0.0.0';
 const codespaceName = process.env.CODESPACE_NAME;
 const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.github.dev/api`
+  ? `https://${codespaceName}-8000.app.github.dev/api`
   : `http://localhost:${port}/api`;
 
 app.use(express.json());
@@ -29,7 +30,7 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Backend server listening on http://localhost:${port}`);
+app.listen(port, host, () => {
+  console.log(`Backend server listening on http://${host}:${port}`);
   console.log(`API base URL: ${apiBaseUrl}`);
 });
