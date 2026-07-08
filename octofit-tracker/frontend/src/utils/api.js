@@ -1,10 +1,10 @@
 function getApiBaseUrl(resource) {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
   const baseUrl = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : 'http://localhost:8000/api';
+    ? `https://${codespaceName}-8000.app.github.dev/api/${resource}`
+    : `http://localhost:8000/api/${resource}`;
 
-  return `${baseUrl}/${resource}/`;
+  return `${baseUrl}/`;
 }
 
 function normalizeItems(payload, resource) {

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "node --loader ts-node/esm src/server.ts",
     "seed": "npm run build && node dist/scripts/seed.js",
     "start": "node dist/server.js"
   },
