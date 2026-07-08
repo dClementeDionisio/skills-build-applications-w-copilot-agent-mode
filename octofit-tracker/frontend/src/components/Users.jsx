@@ -1,23 +1,5 @@
 import { useEffect, useState } from 'react';
-
-function buildApiUrl(resource) {
-  const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
-  const baseUrl = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : 'http://localhost:8000/api';
-
-  return `${baseUrl}/${resource}/`;
-}
-
-function normalizeItems(payload) {
-  if (Array.isArray(payload)) return payload;
-  if (!payload || typeof payload !== 'object') return [];
-  if (Array.isArray(payload.results)) return payload.results;
-  if (Array.isArray(payload.items)) return payload.items;
-  if (Array.isArray(payload.users)) return payload.users;
-  if (Array.isArray(payload.data)) return payload.data;
-  return [];
-}
+import { getApiBaseUrl, normalizeItems } from '../utils/api';
 
 function Users() {
   const [items, setItems] = useState([]);
@@ -29,14 +11,14 @@ function Users() {
 
     async function loadUsers() {
       try {
-        const response = await fetch(buildApiUrl('users'));
+        const response = await fetch(getApiBaseUrl('users'));
         if (!response.ok) {
           throw new Error(`Request failed with ${response.status}`);
         }
 
         const payload = await response.json();
         if (isMounted) {
-          setItems(normalizeItems(payload));
+          setItems(normalizeItems(payload, 'users'));
           setError('');
         }
       } catch (err) {
