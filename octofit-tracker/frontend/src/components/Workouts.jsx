@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
-import { getApiBaseUrl, normalizeItems } from '../utils/api';
+import { normalizeItems } from '../utils/api';
+
+function buildApiUrl() {
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
+  const baseUrl = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api`
+    : 'http://localhost:8000/api';
+
+  return `${baseUrl}/workouts/`;
+}
 
 function Workouts() {
   const [items, setItems] = useState([]);
@@ -11,7 +20,7 @@ function Workouts() {
 
     async function loadWorkouts() {
       try {
-        const response = await fetch(getApiBaseUrl('workouts'));
+        const response = await fetch(buildApiUrl());
         if (!response.ok) {
           throw new Error(`Request failed with ${response.status}`);
         }

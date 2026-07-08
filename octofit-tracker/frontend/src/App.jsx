@@ -61,7 +61,7 @@ function App() {
           Define <code>VITE_CODESPACE_NAME</code> in <code>.env.local</code> for Codespaces URLs.
         </p>
         <p className="mb-0">
-          When it is unset, the app falls back to <code>/api</code> so it does not generate an undefined host.
+          When it is unset, the app falls back to <code>http://localhost:8000/api</code> so it does not generate an undefined host.
         </p>
       </footer>
     </div>
